@@ -1,0 +1,172 @@
+﻿@model LibraryManagementApplication.ViewModel.BookLendViewModel
+
+@{
+    ViewData["Title"] = "Lend book";
+}
+
+<div class="row text bg-light">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Lend Book</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-10 offset-2">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label asp-for="Book.BookCategory" class="control-label">Book Category</label>
+                                    <input asp-for="Book.BookCategoryId" class="form-control" id="Category" />
+                                    <span asp-validation-for="Book.BookCategory" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label asp-for="Book.Title" class="control-label"></label>
+                                    <input asp-for="Book.Title" class="form-control" id="Title" />
+                                    <span asp-validation-for="Book.Title" class="text-danger"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label asp-for="Book.CallNumber" class="control-label"></label>
+                                    <input asp-for="Book.CallNumber" class="form-control" id="CallNumber" />
+                                    <span asp-validation-for="Book.CallNumber" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label asp-for="Book.Author" class="control-label"></label>
+                                    <input asp-for="Book.Author" class="form-control" id="Author" />
+                                    <span asp-validation-for="Book.Author" class="text-danger"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label asp-for="Book.YearOfPublication" class="control-label"></label>
+                                    <input asp-for="Book.YearOfPublication" class="form-control" id="YearOfPublication" />
+                                    <span asp-validation-for="Book.YearOfPublication" class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label asp-for="Book.Volume" class="control-label"></label>
+                                    <input asp-for="Book.Volume" class="form-control" id="Volume" />
+                                    <span asp-validation-for="Book.Volume" class="text-danger"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label @*asp-for="Borrower"*@ class="control-label">Reg No</label>
+                                    <input @*asp-for="Borrower"*@ class="form-control" id="RegNo" />
+                                    <span @*asp-validation-for="Borrower"*@ class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label @*asp-for="Borrower"*@ class="control-label">Name</label>
+                                    <input @*asp-for="Borrower"*@ class="form-control" id="Name" />
+                                    <span @*asp-validation-for="Borrower"*@ class="text-danger"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label @*asp-for="PhoneNumber"*@ class="control-label">Phone Number</label>
+                                    <input @*asp-for="PhoneNumber"*@ class="form-control" id="PhoneNumber" />
+                                    <span @*asp-validation-for="PhoneNumber"*@ class="text-danger"></span>
+                                </div>
+                            </td>
+                            <td colspan="2">
+                                <div class="form-group">
+                                    <label @*asp-for="DueDateOfReturn"*@ class="control-label">Date for Return</label>
+                                    <input asp-for="Book.YearOfPublication" class="form-control" />
+                                    <span @*asp-validation-for="DueDateOfReturn"*@ class="text-danger"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-outline-success float-right" />
+                                    <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Your HTML content here -->
+
+<script>
+    $(document).ready(function() {
+        // Autofill book details
+        $('#Title').on('input', function() {
+            var title = $(this).val();
+
+            $.ajax({
+                url: '@Url.Action("AutofillBookDetails", "BookLends")',
+                type: 'GET',
+                data: { title: title },
+                success: function(response) {
+                    if (response !== null) {
+                        $('#Category').val(response.category);
+                        $('#Author').val(response.author);
+                        $('#CallNumber').val(response.callNumber);
+                        $('#Volume').val(response.volume);
+                        $('#YearOfPublication').val(response.yearOfPublication);
+                    } else {
+                        $('#Author').val('');
+                        $('#CallNumber').val('');
+                        $('#Volume').val('');
+                        $('#YearOfPublication').val('');
+                    }
+                },
+                error: function() {
+                    // Handle the error case if the AJAX request fails
+                }
+            });
+        });
+
+        // Autofill borrower details
+        $('#RegNo').on('input', function() {
+            var regNo = $(this).val();
+
+            $.ajax({
+                url: '@Url.Action("AutofillBorrowerDetails", "BookLends")',
+                type: 'GET',
+                data: { regNo: regNo },
+                success: function(response) {
+                    if (response !== null) {
+                        $('#Name').val(response.name);
+                        $('#PhoneNumber').val(response.phoneNumber);
+                        // Other fields specific to Student or Lecturer can be populated here
+                    } else {
+                        $('#Name').val('');
+                        // Clear other fields if necessary
+                    }
+                },
+                error: function() {
+                    // Handle the error case if the AJAX request fails
+                }
+            });
+        });
+    });
+</script>
+
+<!-- Additional HTML or other content if needed -->

@@ -1,0 +1,56 @@
+﻿@model LibraryManagementApplication.Models.BookLendingPolicy
+
+@{
+    ViewData["Title"] = "Create Policy";
+}
+
+<h4>BookLendingPolicy</h4>
+<hr />
+<div class="row bg-light">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaxNumBooks_Stud" class="control-label"></label>
+                <input asp-for="MaxNumBooks_Stud" class="form-control" />
+                <span asp-validation-for="MaxNumBooks_Stud" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxNumBooks_Lect" class="control-label"></label>
+                <input asp-for="MaxNumBooks_Lect" class="form-control" />
+                <span asp-validation-for="MaxNumBooks_Lect" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxNumDays_Stud" class="control-label"></label>
+                <input asp-for="MaxNumDays_Stud" class="form-control" />
+                <span asp-validation-for="MaxNumDays_Stud" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxNumDays_Lect" class="control-label"></label>
+                <input asp-for="MaxNumDays_Lect" class="form-control" />
+                <span asp-validation-for="MaxNumDays_Lect" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Penalty_Stud" class="control-label"></label>
+                <input asp-for="Penalty_Stud" class="form-control" />
+                <span asp-validation-for="Penalty_Stud" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Penalty_Lect" class="control-label"></label>
+                <input asp-for="Penalty_Lect" class="form-control" />
+                <span asp-validation-for="Penalty_Lect" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<LibraryManagementApplication.Models.BookLend>
+
+<p>
+    <a asp-action="Create" class="text-light">Create New</a>
+</p>
+@{
+    ViewData["Title"] = "Lend book";
+}
+
+<div class="row text bg-light">
+    <form asp-action="Index">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <table class="table bg-light">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Book.BookCategory)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Book.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Book.Author)
+                    </th>
+                    <th>
+                        Reg No
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Due Date of Return
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    @*<tr>
+                            <td class="align-middle">
+                                <img class="rounded-circle" src="@item.BookImage" alt="@item.Title" style="max-width: 150px" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.BookCategoryId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CallNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Author)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.YearOfPublication)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Volume)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                             <td>
+                                <a asp-action="Edit" asp-route-id="">Edit</a> |
+                                <a asp-action="Details" asp-route-id="">Details</a> |
+                                <a asp-action="Delete" asp-route-id="">Delete</a>
+                             </td>
+                        </tr>*@
+                }
+            </tbody>
+
+        </table>
+    </form>
+</div>
+

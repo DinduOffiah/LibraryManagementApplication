@@ -1,0 +1,33 @@
+﻿@model IEnumerable<BookCategory>
+
+@{
+    ViewData["Title"] = "Book Categories";
+}
+
+<h4>
+    <a asp-action="Create" class="text-primary">Create New</a>
+</h4>
+<table class="table bg-light">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.BookCategoryId"><i class="bi bi-pencil-square"></i>Edit </a> |
+                    <a class="btn btn-outline-info" asp-action="Delete" asp-route-id="@item.BookCategoryId"><i class="bi bi-eye"></i>Delete </a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
