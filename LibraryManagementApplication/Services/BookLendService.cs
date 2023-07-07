@@ -18,11 +18,11 @@ namespace LibraryManagementApplication.Services
             _context = context;
         }
 
-        public async Task AddAsync(BookLendViewModel bookLend)
+        public async Task AddAsync(LendReturnType bookLend)
         {
             var bookLends = new BookLend();
-            bookLends.BookId = bookLend.Book.BookId;
-            bookLends.StudentId = bookLend.Student.StudentId;
+            //bookLends.BookId = bookLend.BookId;
+            bookLends.StudentId = bookLend.RegNo;
             await _context.BookLends.AddAsync(bookLends);
             await _context.SaveChangesAsync(); 
         }

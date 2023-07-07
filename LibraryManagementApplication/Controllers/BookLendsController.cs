@@ -32,7 +32,7 @@ namespace LibraryManagementApplication.Controllers
 
         //POST: BookLend/Create
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("BookLendId, BookId, StudentId, LecturerId")] BookLendViewModel bookLend)
+        public async Task<IActionResult> Create([Bind("Title, RegNo, CallNumber")] LendReturnType bookLend)
         {
             if (ModelState.IsValid)
             {

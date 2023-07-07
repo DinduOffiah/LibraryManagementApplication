@@ -12,7 +12,7 @@ namespace LibraryManagementApplication.Services
     {
         Task<IEnumerable<BookLend>> GetAllAsync();
 
-        Task AddAsync(BookLendViewModel bookLend);
+        Task AddAsync(LendReturnType bookLend);
 
         Task<BookLend> GetDetailAsync(int id);
 

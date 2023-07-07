@@ -20,21 +20,9 @@ namespace LibraryManagementApplication.ViewModel
 
     public class LendReturnType
     {
-        public int BookLendId { get; set; }
-
-       
-        public int BookId { get; set; }
-        public Book Book { get; set; }
-
-     
-        public int StudentId { get; set; }
-        public Student Student { get; set; }
-
-       
-        public int LecturerId { get; set; }
-        public Lecturer lecturer { get; set; }
-
-
+        public int RegNo { get; set; }      
+        public string Title { get; set; }
+        public string CallNumber { get; set; }
 
     }
 }
